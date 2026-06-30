@@ -638,6 +638,24 @@ h1 em,h2 em,h3 em{font-style:italic;font-weight:500;color:var(--accent)}
   mix-blend-mode:overlay;
   z-index:1;
 }
+.dress-swatches{
+  display:flex;gap:10px;justify-content:center;margin-top:16px;flex-wrap:wrap;
+}
+.swatch{
+  width:32px;height:32px;border-radius:50%;
+  border:2px solid rgba(255,255,255,.85);
+  box-shadow:0 2px 8px rgba(0,0,0,.18);
+  transition:transform .3s ease;
+}
+.swatch:hover{transform:scale(1.2)}
+.dress-restrictions{
+  text-align:center;margin:36px auto 0;max-width:400px;
+}
+.dress-restrictions p{
+  font-family:var(--sans);font-size:clamp(15px,2.2vw,18px);
+  font-weight:700;letter-spacing:.12em;text-transform:uppercase;
+  color:var(--accent-deep);margin:6px 0;
+}
 
 /* ============ GALLERY — RUEDA DE LA FORTUNA ============ */
 .gallery{padding:min(14vh,130px) 0 min(18vh,170px)}
@@ -1536,7 +1554,7 @@ a:focus-visible,button:focus-visible{outline:2px solid var(--gold);outline-offse
   <section class="section-bg dress">
     <div class="container">
       <div class="eyebrow">Dress code</div>
-      <h2>Formal · <em>Mexicano</em></h2>
+      <h2>Semiformal · <em>Mexicano</em></h2>
       <div class="dress-sub">earth tones &amp; terracotta</div>
       <div class="dress-cols">
         <!-- Gentlemen -->
@@ -1550,10 +1568,13 @@ a:focus-visible,button:focus-visible{outline:2px solid var(--gold);outline-offse
           </svg>
           <div class="dress-col-title">Gentlemen</div>
           <div class="dress-col-rule"></div>
-          <div class="dress-col-sub">Beige pants &amp; embroidered<br>guayabera shirt<br>in <em>earth tones</em></div>
-          <figure class="dress-ref">
-            <img src="vestimenta-hombres.jpg" alt="Gentlemen dress code: embroidered guayabera in earth tones" loading="lazy">
-          </figure>
+          <div class="dress-swatches">
+            <span class="swatch" style="background:#F5F0E1" title="Crema"></span>
+            <span class="swatch" style="background:#C4AD8A" title="Arena"></span>
+            <span class="swatch" style="background:#6B7A3A" title="Verde Olivo"></span>
+            <span class="swatch" style="background:#9BAB8B" title="Verde Salvia"></span>
+            <span class="swatch" style="background:#8B6E55" title="Moka"></span>
+          </div>
         </div>
         <!-- Divider -->
         <div class="dress-divider" aria-hidden="true"></div>
@@ -1567,13 +1588,21 @@ a:focus-visible,button:focus-visible{outline:2px solid var(--gold);outline-offse
           </svg>
           <div class="dress-col-title">Ladies</div>
           <div class="dress-col-rule"></div>
-          <div class="dress-col-sub">Formal dress<br>in <em>earth tones</em></div>
-          <figure class="dress-ref">
-            <img src="vestimenta-mujeres.jpg" alt="Ladies dress code: formal dress in earth tones" loading="lazy">
-          </figure>
+          <div class="dress-swatches">
+            <span class="swatch" style="background:#C9A66B" title="Champagne"></span>
+            <span class="swatch" style="background:#5C3A28" title="Chocolate"></span>
+            <span class="swatch" style="background:#B07A55" title="Cobre"></span>
+            <span class="swatch" style="background:#A89B8B" title="Taupe"></span>
+            <span class="swatch" style="background:#B85A37" title="Terracotta"></span>
+            <span class="swatch" style="background:#D4B98A" title="Dorado"></span>
+          </div>
         </div>
       </div>
-      <p style="text-align:center;font-family:var(--serif);font-style:italic;font-size:14px;color:var(--ink-soft);margin:32px auto 0;max-width:540px;opacity:.9;">This is not a costume party &mdash; formal attire required.</p>
+      <div class="dress-restrictions">
+        <p>No jeans</p>
+        <p>No gorras</p>
+        <p>No tennis shoes</p>
+      </div>
     </div>
   </section>
 
@@ -1986,7 +2015,8 @@ gsap.fromTo('.countdown .eyebrow, .countdown h2, .countdown-sub',{opacity:0,y:14
 // DRESS
 gsap.fromTo('.dress .eyebrow, .dress h2, .dress-sub',{opacity:0,y:14},{opacity:1,y:0,duration:.9,stagger:.08,scrollTrigger:{trigger:'.dress',start:'top 78%'}});
 gsap.fromTo('.dress-col',{opacity:0,y:40,scale:.95},{opacity:1,y:0,scale:1,duration:1.1,stagger:.15,ease:'power4.out',scrollTrigger:{trigger:'.dress-cols',start:'top 82%'}});
-gsap.fromTo('.dress-ref',{opacity:0,scale:.9},{opacity:1,scale:1,duration:1,stagger:.2,ease:'power3.out',scrollTrigger:{trigger:'.dress-cols',start:'top 75%'}});
+gsap.fromTo('.swatch',{opacity:0,scale:0},{opacity:1,scale:1,duration:.6,stagger:.08,ease:'back.out(1.7)',scrollTrigger:{trigger:'.dress-cols',start:'top 75%'}});
+gsap.fromTo('.dress-restrictions p',{opacity:0,y:12},{opacity:1,y:0,duration:.7,stagger:.12,scrollTrigger:{trigger:'.dress-restrictions',start:'top 85%'}});
 
 // WHEEL OF FORTUNE
 const wheel = document.getElementById('wheel');
