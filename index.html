@@ -561,6 +561,8 @@ h1 em,h2 em,h3 em{font-style:italic;font-weight:500;color:var(--accent)}
   background:url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32' width='32' height='32'><rect width='32' height='32' fill='%23B85A37'/><path d='M16 6 L20 14 L28 16 L20 18 L16 26 L12 18 L4 16 L12 14 z' fill='%23FBF1DE' opacity='.85'/><circle cx='16' cy='16' r='2.5' fill='%23B85A37'/><circle cx='16' cy='16' r='1' fill='%23DBB682'/></svg>") repeat-x;
   background-size:32px 32px;transform:scaleY(-1);pointer-events:none;
 }
+.fam-card--raised{grid-column:1/-1;max-width:380px;margin:0 auto;background:transparent;border:1px dashed rgba(201,160,68,.35);box-shadow:none}
+.fam-card--raised .fam-role{font-style:italic;opacity:.85}
 .fam-card--padrino{background:linear-gradient(180deg,#FFF6EE 0%,#FBEDE3 100%)}
 .fam-role{
   font-family:var(--sans);font-weight:500;
@@ -1339,6 +1341,10 @@ a:focus-visible,button:focus-visible{outline:2px solid var(--gold);outline-offse
         <article class="fam-card">
           <div class="fam-role">Bride's Parents</div>
           <div class="fam-names">Sergio Patiño Martínez <span class="cross"><svg viewBox="0 0 10 10" fill="none"><line x1="5" y1="1" x2="5" y2="9" stroke="var(--gold)" stroke-width="1"/><line x1="2" y1="3.5" x2="8" y2="3.5" stroke="var(--gold)" stroke-width="1"/></svg></span><br><span class="amp-gold">&amp;</span><br>Lilia Cruz de Patiño <span class="cross"><svg viewBox="0 0 10 10" fill="none"><line x1="5" y1="1" x2="5" y2="9" stroke="var(--gold)" stroke-width="1"/><line x1="2" y1="3.5" x2="8" y2="3.5" stroke="var(--gold)" stroke-width="1"/></svg></span></div>
+        </article>
+        <article class="fam-card fam-card--raised">
+          <div class="fam-role">Raised with the love of</div>
+          <div class="fam-names">María E. Mendez<br><span class="amp-gold">&amp;</span><br>Roy H. Mendez</div>
         </article>
         <article class="fam-card fam-card--padrino">
           <div class="fam-role">Those who walk with us</div>
