@@ -1378,7 +1378,7 @@ a:focus-visible,button:focus-visible{outline:2px solid var(--gold);outline-offse
             <svg viewBox="0 0 80 2"><line x1="0" y1="1" x2="80" y2="1" stroke="currentColor" stroke-width=".5" opacity=".4"/></svg>
           </div>
           <div class="loc-addr" style="margin-top:12px">14065 SH-16 S<br>San Antonio, TX 78224</div>
-          <div class="loc-note">Open Air · Outdoor</div>
+          <div class="loc-note">Indoor Venue</div>
           <div class="loc-map">
             <iframe loading="lazy" referrerpolicy="no-referrer-when-downgrade" allowfullscreen
               src="https://maps.google.com/maps?q=14065+SH-16+S+San+Antonio+TX+78224&t=&z=15&ie=UTF8&iwloc=&output=embed"
@@ -1494,7 +1494,7 @@ a:focus-visible,button:focus-visible{outline:2px solid var(--gold);outline-offse
             <div class="program-detail">
               <div class="program-roman">— I —</div>
               <div class="program-name">Ceremony</div>
-              <div class="program-desc">We unite in marriage before our loved ones, under the open sky.</div>
+              <div class="program-desc">We unite in marriage before our loved ones, inside the venue.</div>
             </div>
           </li>
           <li class="program-row">
@@ -2106,139 +2106,168 @@ gsap.fromTo('.album .eyebrow, .album h2, .album-text',{opacity:0,y:18},{opacity:
 gsap.fromTo('#qr-wrap',{opacity:0,y:30,scale:.94},{opacity:1,y:0,scale:1,duration:1.2,ease:'power3.out',scrollTrigger:{trigger:'#qr-wrap',start:'top 82%'}});
 gsap.fromTo('.album-link',{opacity:0,y:10},{opacity:1,y:0,duration:.9,scrollTrigger:{trigger:'.album-link',start:'top 90%'}});
 
-// RSVP — Panel de Invitados (estilo jennifer)
+// RSVP · PANEL INTEGRATION (patrón estándar)
 (function(){
   const PANEL_API = 'https://panel-invitados.vercel.app/api/confirmar';
-  const RSVP_URL  = 'boda-leslie-y-rudy';
-  const DEADLINE  = new Date(2026, 9, 10);
+  const RSVP_URL  = 'https://boda-leslie-y-rudy.vercel.app';
+  const DEADLINE  = new Date(2026, 9, 10, 23, 59, 59, 999);
+  const frozen    = Date.now() > DEADLINE.getTime();
+  const params    = new URLSearchParams(location.search);
+  const urlPara   = (params.get('para') || '').trim();
+  const rawP      = parseInt(params.get('pases') || '1', 10);
+  let pasesAsignados = (isNaN(rawP) || rawP < 1 || rawP > 20) ? 1 : rawP;
 
-  const params    = new URLSearchParams(window.location.search);
-  const guestName = params.get('para') || '';
-  const passes    = parseInt(params.get('pases'),10) || 0;
+  let rsvpChoice = null;
+  let savedNames = [];
 
   const nameDisplay = document.getElementById('rsvp-name-display');
   const pasesNum    = document.getElementById('rsvp-pases-num');
   const pasesDisplay= document.getElementById('rsvp-pases-display');
   const pasesNote   = document.getElementById('rsvp-pases-note');
+  const fieldsEl    = document.getElementById('rsvp-fields');
   const btnYes      = document.getElementById('btnYes');
   const btnNo       = document.getElementById('btnNo');
-  const fieldsWrap  = document.getElementById('rsvp-fields');
-  const confirmBtn  = document.getElementById('rsvp-confirm-btn');
+  const btnConf     = document.getElementById('rsvp-confirm-btn');
   const btnText     = document.getElementById('rsvp-btn-text');
-  const feedback    = document.getElementById('rsvp-feedback');
+  const feedEl      = document.getElementById('rsvp-feedback');
+  if(!btnConf || !btnYes) return;
 
-  if(guestName && nameDisplay){
-    nameDisplay.textContent = guestName;
-    nameDisplay.style.display = 'block';
+  if(urlPara){
+    if(nameDisplay){
+      nameDisplay.textContent = urlPara;
+      nameDisplay.style.display = 'block';
+    }
+    btnYes.disabled = true;
+    btnNo.disabled  = true;
+  } else {
+    if(pasesNum) pasesNum.textContent = pasesAsignados;
   }
-  if(passes && pasesNum) pasesNum.textContent = passes;
-  if(!passes && pasesDisplay) pasesDisplay.style.display = 'none';
 
-  let choice = null;
-
-  function buildFields(n){
-    if(!fieldsWrap) return;
-    fieldsWrap.innerHTML = '';
-    if(n <= 0){ fieldsWrap.style.display = 'none'; return; }
-    fieldsWrap.style.display = 'flex';
+  function renderFields(n){
+    if(!fieldsEl) return;
+    fieldsEl.innerHTML = '';
     for(let i = 0; i < n; i++){
       const inp = document.createElement('input');
-      inp.className = 'rsvp-input';
       inp.type = 'text';
-      inp.placeholder = 'Guest name ' + (i+1);
-      inp.autocomplete = 'name';
-      fieldsWrap.appendChild(inp);
+      inp.className = 'rsvp-input';
+      inp.placeholder = n === 1 ? 'Your full name' : 'Guest name ' + (i+1);
+      inp.autocomplete = 'off';
+      inp.maxLength = 60;
+      inp.value = savedNames[i] || '';
+      ((idx) => inp.addEventListener('input', function(){ savedNames[idx] = this.value; }))(i);
+      fieldsEl.appendChild(inp);
     }
   }
 
-  function selectYes(){
-    choice = true;
-    btnYes.classList.add('rsvp-toggle-selected-yes');
-    btnNo.classList.remove('rsvp-toggle-selected-no');
-    buildFields(passes || 1);
-    if(pasesNote){ pasesNote.style.display = 'block'; pasesNote.textContent = 'Enter each guest\'s name'; }
-  }
-  function selectNo(){
-    choice = false;
-    btnNo.classList.add('rsvp-toggle-selected-no');
-    btnYes.classList.remove('rsvp-toggle-selected-yes');
-    buildFields(0);
-    if(pasesNote){ pasesNote.style.display = 'block'; pasesNote.textContent = 'We\'re sorry you can\'t attend'; }
+  function selectRsvp(choice){
+    rsvpChoice = choice;
+    if(choice === 'yes'){
+      btnYes.classList.add('rsvp-toggle-selected-yes');
+      btnNo.classList.remove('rsvp-toggle-selected-no');
+      renderFields(pasesAsignados);
+      if(fieldsEl) fieldsEl.style.display = 'flex';
+      if(pasesNote){ pasesNote.style.display = 'block'; pasesNote.textContent = "Enter each guest's name"; }
+    } else {
+      btnNo.classList.add('rsvp-toggle-selected-no');
+      btnYes.classList.remove('rsvp-toggle-selected-yes');
+      if(fieldsEl){ fieldsEl.style.display = 'none'; fieldsEl.innerHTML = ''; }
+      if(pasesNote){ pasesNote.style.display = 'block'; pasesNote.textContent = "We're sorry you can't attend"; }
+    }
   }
 
-  if(btnYes) btnYes.addEventListener('click', selectYes);
-  if(btnNo)  btnNo.addEventListener('click', selectNo);
+  btnYes.addEventListener('click', () => selectRsvp('yes'));
+  btnNo.addEventListener('click',  () => selectRsvp('no'));
 
-  // Pre-fill if already confirmed
-  if(guestName){
-    fetch(PANEL_API + '?slug=' + RSVP_URL + '&nombre=' + encodeURIComponent(guestName))
-      .then(r => r.ok ? r.json() : null)
-      .then(data => {
-        if(data && data.confirmado !== undefined){
-          if(data.confirmado) selectYes(); else selectNo();
-          if(data.nombres && fieldsWrap){
-            const inputs = fieldsWrap.querySelectorAll('input');
-            data.nombres.forEach((n,i) => { if(inputs[i]) inputs[i].value = n; });
+  if(urlPara){
+    fetch(PANEL_API + '?nombre=' + encodeURIComponent(urlPara) + '&url_boda=' + encodeURIComponent(RSVP_URL))
+      .then(r => r.json())
+      .then(resp => {
+        const d = resp.invitado;
+        if(d && typeof d.pases === 'number' && d.pases > 0 && d.pases <= 20){
+          pasesAsignados = d.pases;
+        }
+        if(pasesNum) pasesNum.textContent = pasesAsignados;
+        btnYes.disabled = false;
+        btnNo.disabled  = false;
+        if(d && (d.estado === 'confirmado' || d.estado === 'declino')){
+          if(d.nombres_confirmados && d.nombres_confirmados.length){
+            savedNames = d.nombres_confirmados.slice();
+          }
+          selectRsvp(d.estado === 'confirmado' ? 'yes' : 'no');
+          if(btnText) btnText.textContent = 'Update response';
+          if(feedEl){
+            feedEl.style.display = 'block';
+            feedEl.textContent = d.estado === 'confirmado'
+              ? "You've already confirmed your attendance! You can update your response."
+              : "You've already let us know you can't attend. You can change your response.";
           }
         }
-      }).catch(()=>{});
+      })
+      .catch(() => {
+        if(pasesNum) pasesNum.textContent = pasesAsignados;
+        btnYes.disabled = false;
+        btnNo.disabled  = false;
+      });
   }
 
-  // Freeze after deadline
-  if(Date.now() > DEADLINE.getTime()){
-    [btnYes, btnNo, confirmBtn].forEach(b => { if(b) b.disabled = true; });
-    if(feedback){ feedback.textContent = 'The RSVP deadline has passed.'; feedback.style.display = 'block'; }
+  if(frozen){
+    btnYes.disabled = true;
+    btnNo.disabled  = true;
+    btnConf.disabled = true;
+    if(btnText) btnText.textContent = 'Deadline passed';
+    if(feedEl){ feedEl.style.display = 'block'; feedEl.textContent = 'The RSVP deadline has passed.'; }
   }
 
-  if(confirmBtn){
-    confirmBtn.addEventListener('click', async ()=>{
-      if(choice === null){
-        if(feedback){ feedback.textContent = 'Please select whether you will attend or not.'; feedback.style.display = 'block'; feedback.style.color = 'var(--accent)'; }
+  btnConf.addEventListener('click', () => {
+    if(frozen) return;
+    if(!rsvpChoice){
+      if(feedEl){ feedEl.style.display = 'block'; feedEl.style.color = '#9a4a3a'; feedEl.textContent = 'Please select whether you will attend or not.'; }
+      return;
+    }
+    let nombres = [];
+    if(rsvpChoice === 'yes'){
+      const inputs = fieldsEl ? fieldsEl.querySelectorAll('.rsvp-input') : [];
+      for(let i=0;i<inputs.length;i++){
+        const v = inputs[i].value.trim();
+        if(v) nombres.push(v);
+      }
+      if(nombres.length === 0){
+        if(feedEl){ feedEl.style.display = 'block'; feedEl.style.color = '#9a4a3a'; feedEl.textContent = 'Please enter at least one name.'; }
         return;
       }
-      if(!guestName){
-        if(feedback){ feedback.textContent = 'Link without guest data. Please request your personalized link.'; feedback.style.display = 'block'; feedback.style.color = 'var(--accent)'; }
-        return;
+    }
+    if(btnText) btnText.textContent = 'Sending…';
+    btnConf.disabled = true;
+    if(feedEl){ feedEl.style.display = 'none'; feedEl.textContent = ''; feedEl.style.color = ''; }
+    fetch(PANEL_API, {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({
+        nombre: urlPara || 'Invitado',
+        url_boda: RSVP_URL,
+        estado: rsvpChoice === 'yes' ? 'confirmado' : 'declino',
+        pases_confirmados: rsvpChoice === 'yes' ? nombres.length : 0,
+        nombres_confirmados: nombres
+      })
+    })
+    .then(r => r.json())
+    .then(() => {
+      if(btnText) btnText.textContent = 'Update response';
+      btnConf.disabled = false;
+      if(feedEl){
+        feedEl.style.display = 'block';
+        feedEl.style.color = rsvpChoice === 'yes' ? '#2F5A28' : 'var(--gold-deep)';
+        feedEl.textContent = rsvpChoice === 'yes'
+          ? 'Your attendance has been confirmed! See you soon. ✦'
+          : "We've registered that you can't attend. Thank you for letting us know!";
       }
-
-      const nombres = [];
-      if(choice && fieldsWrap){
-        fieldsWrap.querySelectorAll('input').forEach(inp => nombres.push(inp.value.trim() || 'Guest'));
-      }
-
-      confirmBtn.disabled = true;
-      if(btnText) btnText.textContent = 'Sending...';
-
-      try{
-        const res = await fetch(PANEL_API,{
-          method:'POST',
-          headers:{'Content-Type':'application/json'},
-          body:JSON.stringify({
-            slug: RSVP_URL,
-            nombre: guestName,
-            pases: passes || 1,
-            confirmado: choice,
-            nombres: nombres
-          })
-        });
-        if(res.ok){
-          if(feedback){
-            feedback.textContent = choice
-              ? 'Thank you, ' + guestName + '! Your attendance has been confirmed.'
-              : 'Thank you for letting us know, ' + guestName + '. We will miss you.';
-            feedback.style.display = 'block';
-            feedback.style.color = 'var(--gold-deep)';
-          }
-          if(btnText) btnText.textContent = '✓ Sent';
-          [btnYes, btnNo].forEach(b => { if(b) b.disabled = true; });
-        } else { throw new Error('err'); }
-      }catch(e){
-        if(feedback){ feedback.textContent = 'An error occurred. Please try again.'; feedback.style.display = 'block'; feedback.style.color = 'var(--accent)'; }
-        confirmBtn.disabled = false;
-        if(btnText) btnText.textContent = 'Confirm';
-      }
+    })
+    .catch(() => {
+      if(btnText) btnText.textContent = 'Confirm';
+      btnConf.disabled = false;
+      if(feedEl){ feedEl.style.display = 'block'; feedEl.style.color = '#B85042'; feedEl.textContent = 'Connection error. Please try again.'; }
     });
-  }
+  });
 })();
 
 gsap.fromTo('.rsvp-ornament',{opacity:0,scaleX:0},{opacity:1,scaleX:1,duration:1.2,ease:'power3.out',scrollTrigger:{trigger:'.rsvp-ornament',start:'top 85%'}});
