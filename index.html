@@ -595,37 +595,59 @@ h1 em,h2 em,h3 em{font-style:italic;font-weight:500;color:var(--accent)}
 .dress{text-align:center}
 .dress h2{font-size:clamp(38px,5.5vw,60px);margin-bottom:20px}
 .dress-sub{font-family:var(--script);color:var(--gold);font-size:34px;margin-bottom:20px;line-height:1}
-.dress-note{font-family:var(--italiana);font-size:14px;letter-spacing:.35em;text-transform:uppercase;color:var(--ink-soft);padding-left:.35em;margin-bottom:64px}
-.dress-swatches{display:flex;justify-content:center;gap:clamp(22px,4vw,48px);flex-wrap:wrap}
-.swatch{text-align:center}
-.swatch-c{
-  width:clamp(70px,10vw,100px);height:clamp(70px,10vw,100px);
-  border-radius:50%;margin:0 auto 18px;
+.dress-cols{
+  display:flex;align-items:stretch;justify-content:center;
+  max-width:600px;margin:0 auto 56px;
+}
+.dress-col{
+  flex:1;min-width:0;display:flex;flex-direction:column;align-items:center;
+  padding:clamp(16px,4vw,36px) clamp(12px,3vw,28px) clamp(20px,4vw,32px);
+  gap:10px;
+}
+.dress-col .dress-ref{margin-top:auto}
+.dress-divider{
+  width:1px;flex-shrink:0;align-self:stretch;
+  background:linear-gradient(to bottom,transparent,rgba(201,164,86,.5) 20%,rgba(201,164,86,.5) 80%,transparent);
+}
+.dress-col-icon{
+  width:36px;height:36px;color:var(--gold);opacity:.85;margin-bottom:4px;
+}
+.dress-col-title{
+  font-family:var(--display);font-style:italic;font-weight:400;
+  font-size:clamp(20px,3vw,26px);color:var(--accent-deep);line-height:1;
+}
+.dress-col-rule{
+  width:32px;height:1px;
+  background:linear-gradient(to right,transparent,rgba(201,164,86,.55),transparent);
+  margin:2px 0;
+}
+.dress-col-sub{
+  font-family:var(--italiana);font-size:11.5px;letter-spacing:.38em;
+  text-transform:uppercase;color:var(--ink-soft);padding-left:.38em;
+  line-height:1.5;text-align:center;
+}
+.dress-ref{
+  margin:18px auto 0;
+  width:100%;
+  position:relative;
+  aspect-ratio: 4 / 3;
+  border-radius:14px;
+  overflow:hidden;
   box-shadow:
-    inset 0 -8px 20px rgba(0,0,0,.15),
-    0 1px 2px rgba(30,47,78,.05),
-    0 10px 26px -10px rgba(30,47,78,.22),
-    0 34px 80px -40px rgba(30,47,78,.35);
-  border:1px solid var(--hair);position:relative;
+    0 6px 22px rgba(58,31,18,.22),
+    0 1px 3px rgba(58,31,18,.12);
 }
-.swatch-c::after{
-  content:"";position:absolute;top:14%;left:22%;width:30%;height:22%;
-  border-radius:50%;
-  background:radial-gradient(circle, rgba(255,255,255,.4), transparent 70%);
+.dress-ref img{
+  display:block;
+  width:100%;height:100%;
+  object-fit:cover;object-position:center;
 }
-.swatch-n{font-family:var(--sans);font-size:10px;letter-spacing:.4em;text-transform:uppercase;color:var(--ink-soft);padding-left:.4em;font-weight:500}
-.dress-avoid{
-  margin-top:48px;font-family:var(--sans);font-size:13px;font-weight:500;
-  color:var(--ink-soft);letter-spacing:.2em;text-transform:uppercase;
-}
-.dress-avoid-swatches{display:flex;justify-content:center;gap:24px;margin-top:18px}
-.swatch-avoid .swatch-c{
-  width:60px;height:60px;position:relative;
-  opacity:.6;
-}
-.swatch-avoid .swatch-c::before{
-  content:"";position:absolute;inset:0;border-radius:50%;
-  background:linear-gradient(135deg, transparent 40%, rgba(200,0,0,.4) 40%, rgba(200,0,0,.4) 60%, transparent 60%);
+.dress-ref::after{
+  content:"";position:absolute;inset:6px;
+  border:1px solid rgba(184,144,72,.45);
+  border-radius:10px;
+  pointer-events:none;
+  mix-blend-mode:overlay;
   z-index:1;
 }
 
@@ -1301,25 +1323,25 @@ a:focus-visible,button:focus-visible{outline:2px solid var(--gold);outline-offse
       <div class="family-grid">
         <article class="fam-card">
           <svg class="fam-corner fam-corner--tl" viewBox="0 0 62 62" fill="none"><g stroke="currentColor" stroke-width="1" fill="none"><path d="M2 28 L2 2 L28 2"/><path d="M8 32 L8 8 L32 8" opacity=".55"/><path d="M14 8 Q10 8 10 12 Q10 18 16 18 Q22 18 22 12 Q22 8 18 8 Q14 8 14 12" fill="currentColor" fill-opacity=".15"/><circle cx="16" cy="13" r="2" fill="currentColor"/><path d="M30 8 Q38 16 30 24" opacity=".55"/><path d="M8 30 Q16 38 24 30" opacity=".55"/><path d="M2 38 Q8 42 14 38" opacity=".4"/><path d="M38 2 Q42 8 38 14" opacity=".4"/><path d="M48 8 L52 8 L52 12" opacity=".4"/><path d="M8 48 L8 52 L12 52" opacity=".4"/><circle cx="42" cy="42" r="1.4" fill="currentColor" opacity=".55"/></g></svg>
-          <svg class="fam-corner fam-corner--tr" viewBox="0 0 62 62" fill="none"><g stroke="currentColor" stroke-width="1" fill="none"><path d="M2 28 L2 2 L28 2"/><path d="M8 32 L8 8 L32 8" opacity=".55"/><path d="M14 8 Q10 8 10 12 Q10 18 16 18 Q22 18 22 12 Q22 8 18 8 Q14 8 14 12" fill="currentColor" fill-opacity=".15"/><circle cx="16" cy="13" r="2" fill="currentColor"/><path d="M30 8 Q38 16 30 24" opacity=".55"/><path d="M8 30 Q16 38 24 30" opacity=".55"/><path d="M2 38 Q8 42 14 38" opacity=".4"/><path d="M38 2 Q42 8 38 14" opacity=".4"/><path d="M48 8 L52 8 L52 12" opacity=".4"/><path d="M8 48 L8 52 L12 52" opacity=".4"/><circle cx="42" cy="42" r="1.4" fill="currentColor" opacity=".55"/></g></svg>
-          <svg class="fam-corner fam-corner--bl" viewBox="0 0 62 62" fill="none"><g stroke="currentColor" stroke-width="1" fill="none"><path d="M2 28 L2 2 L28 2"/><path d="M8 32 L8 8 L32 8" opacity=".55"/><path d="M14 8 Q10 8 10 12 Q10 18 16 18 Q22 18 22 12 Q22 8 18 8 Q14 8 14 12" fill="currentColor" fill-opacity=".15"/><circle cx="16" cy="13" r="2" fill="currentColor"/><path d="M30 8 Q38 16 30 24" opacity=".55"/><path d="M8 30 Q16 38 24 30" opacity=".55"/><path d="M2 38 Q8 42 14 38" opacity=".4"/><path d="M38 2 Q42 8 38 14" opacity=".4"/><path d="M48 8 L52 8 L52 12" opacity=".4"/><path d="M8 48 L8 52 L12 52" opacity=".4"/><circle cx="42" cy="42" r="1.4" fill="currentColor" opacity=".55"/></g></svg>
-          <svg class="fam-corner fam-corner--br" viewBox="0 0 62 62" fill="none"><g stroke="currentColor" stroke-width="1" fill="none"><path d="M2 28 L2 2 L28 2"/><path d="M8 32 L8 8 L32 8" opacity=".55"/><path d="M14 8 Q10 8 10 12 Q10 18 16 18 Q22 18 22 12 Q22 8 18 8 Q14 8 14 12" fill="currentColor" fill-opacity=".15"/><circle cx="16" cy="13" r="2" fill="currentColor"/><path d="M30 8 Q38 16 30 24" opacity=".55"/><path d="M8 30 Q16 38 24 30" opacity=".55"/><path d="M2 38 Q8 42 14 38" opacity=".4"/><path d="M38 2 Q42 8 38 14" opacity=".4"/><path d="M48 8 L52 8 L52 12" opacity=".4"/><path d="M8 48 L8 52 L12 52" opacity=".4"/><circle cx="42" cy="42" r="1.4" fill="currentColor" opacity=".55"/></g></svg>
+          <svg class="fam-corner fam-corner--tr" viewBox="0 0 62 62" fill="none"><g stroke="currentColor" stroke-width="1" fill="none"><path d="M2 28 L2 2 L28 2"/><path d="M8 32 L8 8 L32 8" opacity=".55"/><path d="M14 8 Q10 8 10 12 Q10 18 16 18 Q22 18 22 12 Q22 8 18 8 Q14 8 14 12" fill="currentColor" fill-opacity=".15"/><circle cx="16" cy="13" r="2" fill="currentColor"/><path d="M30 8 Q38 16 30 24" opacity=".55"/><path d="M8 30 Q16 38 24 30" opacity=".55"/><circle cx="42" cy="42" r="1.4" fill="currentColor" opacity=".55"/></g></svg>
+          <svg class="fam-corner fam-corner--bl" viewBox="0 0 62 62" fill="none"><g stroke="currentColor" stroke-width="1" fill="none"><path d="M2 28 L2 2 L28 2"/><path d="M8 32 L8 8 L32 8" opacity=".55"/><path d="M14 8 Q10 8 10 12 Q10 18 16 18 Q22 18 22 12 Q22 8 18 8 Q14 8 14 12" fill="currentColor" fill-opacity=".15"/><circle cx="16" cy="13" r="2" fill="currentColor"/><path d="M30 8 Q38 16 30 24" opacity=".55"/><path d="M8 30 Q16 38 24 30" opacity=".55"/><circle cx="42" cy="42" r="1.4" fill="currentColor" opacity=".55"/></g></svg>
+          <svg class="fam-corner fam-corner--br" viewBox="0 0 62 62" fill="none"><g stroke="currentColor" stroke-width="1" fill="none"><path d="M2 28 L2 2 L28 2"/><path d="M8 32 L8 8 L32 8" opacity=".55"/><path d="M14 8 Q10 8 10 12 Q10 18 16 18 Q22 18 22 12 Q22 8 18 8 Q14 8 14 12" fill="currentColor" fill-opacity=".15"/><circle cx="16" cy="13" r="2" fill="currentColor"/><path d="M30 8 Q38 16 30 24" opacity=".55"/><path d="M8 30 Q16 38 24 30" opacity=".55"/><circle cx="42" cy="42" r="1.4" fill="currentColor" opacity=".55"/></g></svg>
           <div class="fam-role">Groom's Parents</div>
           <div class="fam-names">Rudy Garza Sr.<br><span class="amp-gold">&amp;</span><br>Pauline C. Garza <span class="cross"><svg viewBox="0 0 10 10" fill="none"><line x1="5" y1="1" x2="5" y2="9" stroke="var(--gold)" stroke-width="1"/><line x1="2" y1="3.5" x2="8" y2="3.5" stroke="var(--gold)" stroke-width="1"/></svg></span></div>
         </article>
         <article class="fam-card">
           <svg class="fam-corner fam-corner--tl" viewBox="0 0 62 62" fill="none"><g stroke="currentColor" stroke-width="1" fill="none"><path d="M2 28 L2 2 L28 2"/><path d="M8 32 L8 8 L32 8" opacity=".55"/><path d="M14 8 Q10 8 10 12 Q10 18 16 18 Q22 18 22 12 Q22 8 18 8 Q14 8 14 12" fill="currentColor" fill-opacity=".15"/><circle cx="16" cy="13" r="2" fill="currentColor"/><path d="M30 8 Q38 16 30 24" opacity=".55"/><path d="M8 30 Q16 38 24 30" opacity=".55"/><path d="M2 38 Q8 42 14 38" opacity=".4"/><path d="M38 2 Q42 8 38 14" opacity=".4"/><path d="M48 8 L52 8 L52 12" opacity=".4"/><path d="M8 48 L8 52 L12 52" opacity=".4"/><circle cx="42" cy="42" r="1.4" fill="currentColor" opacity=".55"/></g></svg>
-          <svg class="fam-corner fam-corner--tr" viewBox="0 0 62 62" fill="none"><g stroke="currentColor" stroke-width="1" fill="none"><path d="M2 28 L2 2 L28 2"/><path d="M8 32 L8 8 L32 8" opacity=".55"/><path d="M14 8 Q10 8 10 12 Q10 18 16 18 Q22 18 22 12 Q22 8 18 8 Q14 8 14 12" fill="currentColor" fill-opacity=".15"/><circle cx="16" cy="13" r="2" fill="currentColor"/><path d="M30 8 Q38 16 30 24" opacity=".55"/><path d="M8 30 Q16 38 24 30" opacity=".55"/><path d="M2 38 Q8 42 14 38" opacity=".4"/><path d="M38 2 Q42 8 38 14" opacity=".4"/><path d="M48 8 L52 8 L52 12" opacity=".4"/><path d="M8 48 L8 52 L12 52" opacity=".4"/><circle cx="42" cy="42" r="1.4" fill="currentColor" opacity=".55"/></g></svg>
-          <svg class="fam-corner fam-corner--bl" viewBox="0 0 62 62" fill="none"><g stroke="currentColor" stroke-width="1" fill="none"><path d="M2 28 L2 2 L28 2"/><path d="M8 32 L8 8 L32 8" opacity=".55"/><path d="M14 8 Q10 8 10 12 Q10 18 16 18 Q22 18 22 12 Q22 8 18 8 Q14 8 14 12" fill="currentColor" fill-opacity=".15"/><circle cx="16" cy="13" r="2" fill="currentColor"/><path d="M30 8 Q38 16 30 24" opacity=".55"/><path d="M8 30 Q16 38 24 30" opacity=".55"/><path d="M2 38 Q8 42 14 38" opacity=".4"/><path d="M38 2 Q42 8 38 14" opacity=".4"/><path d="M48 8 L52 8 L52 12" opacity=".4"/><path d="M8 48 L8 52 L12 52" opacity=".4"/><circle cx="42" cy="42" r="1.4" fill="currentColor" opacity=".55"/></g></svg>
-          <svg class="fam-corner fam-corner--br" viewBox="0 0 62 62" fill="none"><g stroke="currentColor" stroke-width="1" fill="none"><path d="M2 28 L2 2 L28 2"/><path d="M8 32 L8 8 L32 8" opacity=".55"/><path d="M14 8 Q10 8 10 12 Q10 18 16 18 Q22 18 22 12 Q22 8 18 8 Q14 8 14 12" fill="currentColor" fill-opacity=".15"/><circle cx="16" cy="13" r="2" fill="currentColor"/><path d="M30 8 Q38 16 30 24" opacity=".55"/><path d="M8 30 Q16 38 24 30" opacity=".55"/><path d="M2 38 Q8 42 14 38" opacity=".4"/><path d="M38 2 Q42 8 38 14" opacity=".4"/><path d="M48 8 L52 8 L52 12" opacity=".4"/><path d="M8 48 L8 52 L12 52" opacity=".4"/><circle cx="42" cy="42" r="1.4" fill="currentColor" opacity=".55"/></g></svg>
+          <svg class="fam-corner fam-corner--tr" viewBox="0 0 62 62" fill="none"><g stroke="currentColor" stroke-width="1" fill="none"><path d="M2 28 L2 2 L28 2"/><path d="M8 32 L8 8 L32 8" opacity=".55"/><path d="M14 8 Q10 8 10 12 Q10 18 16 18 Q22 18 22 12 Q22 8 18 8 Q14 8 14 12" fill="currentColor" fill-opacity=".15"/><circle cx="16" cy="13" r="2" fill="currentColor"/><path d="M30 8 Q38 16 30 24" opacity=".55"/><path d="M8 30 Q16 38 24 30" opacity=".55"/><circle cx="42" cy="42" r="1.4" fill="currentColor" opacity=".55"/></g></svg>
+          <svg class="fam-corner fam-corner--bl" viewBox="0 0 62 62" fill="none"><g stroke="currentColor" stroke-width="1" fill="none"><path d="M2 28 L2 2 L28 2"/><path d="M8 32 L8 8 L32 8" opacity=".55"/><path d="M14 8 Q10 8 10 12 Q10 18 16 18 Q22 18 22 12 Q22 8 18 8 Q14 8 14 12" fill="currentColor" fill-opacity=".15"/><circle cx="16" cy="13" r="2" fill="currentColor"/><path d="M30 8 Q38 16 30 24" opacity=".55"/><path d="M8 30 Q16 38 24 30" opacity=".55"/><circle cx="42" cy="42" r="1.4" fill="currentColor" opacity=".55"/></g></svg>
+          <svg class="fam-corner fam-corner--br" viewBox="0 0 62 62" fill="none"><g stroke="currentColor" stroke-width="1" fill="none"><path d="M2 28 L2 2 L28 2"/><path d="M8 32 L8 8 L32 8" opacity=".55"/><path d="M14 8 Q10 8 10 12 Q10 18 16 18 Q22 18 22 12 Q22 8 18 8 Q14 8 14 12" fill="currentColor" fill-opacity=".15"/><circle cx="16" cy="13" r="2" fill="currentColor"/><path d="M30 8 Q38 16 30 24" opacity=".55"/><path d="M8 30 Q16 38 24 30" opacity=".55"/><circle cx="42" cy="42" r="1.4" fill="currentColor" opacity=".55"/></g></svg>
           <div class="fam-role">Bride's Parents</div>
           <div class="fam-names">Sergio Patiño Martínez <span class="cross"><svg viewBox="0 0 10 10" fill="none"><line x1="5" y1="1" x2="5" y2="9" stroke="var(--gold)" stroke-width="1"/><line x1="2" y1="3.5" x2="8" y2="3.5" stroke="var(--gold)" stroke-width="1"/></svg></span><br><span class="amp-gold">&amp;</span><br>Lilia Cruz de Patiño <span class="cross"><svg viewBox="0 0 10 10" fill="none"><line x1="5" y1="1" x2="5" y2="9" stroke="var(--gold)" stroke-width="1"/><line x1="2" y1="3.5" x2="8" y2="3.5" stroke="var(--gold)" stroke-width="1"/></svg></span></div>
         </article>
         <article class="fam-card fam-card--padrino">
           <svg class="fam-corner fam-corner--tl" viewBox="0 0 62 62" fill="none"><g stroke="currentColor" stroke-width="1" fill="none"><path d="M2 28 L2 2 L28 2"/><path d="M8 32 L8 8 L32 8" opacity=".55"/><path d="M14 8 Q10 8 10 12 Q10 18 16 18 Q22 18 22 12 Q22 8 18 8 Q14 8 14 12" fill="currentColor" fill-opacity=".15"/><circle cx="16" cy="13" r="2" fill="currentColor"/><path d="M30 8 Q38 16 30 24" opacity=".55"/><path d="M8 30 Q16 38 24 30" opacity=".55"/><path d="M2 38 Q8 42 14 38" opacity=".4"/><path d="M38 2 Q42 8 38 14" opacity=".4"/><path d="M48 8 L52 8 L52 12" opacity=".4"/><path d="M8 48 L8 52 L12 52" opacity=".4"/><circle cx="42" cy="42" r="1.4" fill="currentColor" opacity=".55"/></g></svg>
-          <svg class="fam-corner fam-corner--tr" viewBox="0 0 62 62" fill="none"><g stroke="currentColor" stroke-width="1" fill="none"><path d="M2 28 L2 2 L28 2"/><path d="M8 32 L8 8 L32 8" opacity=".55"/><path d="M14 8 Q10 8 10 12 Q10 18 16 18 Q22 18 22 12 Q22 8 18 8 Q14 8 14 12" fill="currentColor" fill-opacity=".15"/><circle cx="16" cy="13" r="2" fill="currentColor"/><path d="M30 8 Q38 16 30 24" opacity=".55"/><path d="M8 30 Q16 38 24 30" opacity=".55"/><path d="M2 38 Q8 42 14 38" opacity=".4"/><path d="M38 2 Q42 8 38 14" opacity=".4"/><path d="M48 8 L52 8 L52 12" opacity=".4"/><path d="M8 48 L8 52 L12 52" opacity=".4"/><circle cx="42" cy="42" r="1.4" fill="currentColor" opacity=".55"/></g></svg>
-          <svg class="fam-corner fam-corner--bl" viewBox="0 0 62 62" fill="none"><g stroke="currentColor" stroke-width="1" fill="none"><path d="M2 28 L2 2 L28 2"/><path d="M8 32 L8 8 L32 8" opacity=".55"/><path d="M14 8 Q10 8 10 12 Q10 18 16 18 Q22 18 22 12 Q22 8 18 8 Q14 8 14 12" fill="currentColor" fill-opacity=".15"/><circle cx="16" cy="13" r="2" fill="currentColor"/><path d="M30 8 Q38 16 30 24" opacity=".55"/><path d="M8 30 Q16 38 24 30" opacity=".55"/><path d="M2 38 Q8 42 14 38" opacity=".4"/><path d="M38 2 Q42 8 38 14" opacity=".4"/><path d="M48 8 L52 8 L52 12" opacity=".4"/><path d="M8 48 L8 52 L12 52" opacity=".4"/><circle cx="42" cy="42" r="1.4" fill="currentColor" opacity=".55"/></g></svg>
-          <svg class="fam-corner fam-corner--br" viewBox="0 0 62 62" fill="none"><g stroke="currentColor" stroke-width="1" fill="none"><path d="M2 28 L2 2 L28 2"/><path d="M8 32 L8 8 L32 8" opacity=".55"/><path d="M14 8 Q10 8 10 12 Q10 18 16 18 Q22 18 22 12 Q22 8 18 8 Q14 8 14 12" fill="currentColor" fill-opacity=".15"/><circle cx="16" cy="13" r="2" fill="currentColor"/><path d="M30 8 Q38 16 30 24" opacity=".55"/><path d="M8 30 Q16 38 24 30" opacity=".55"/><path d="M2 38 Q8 42 14 38" opacity=".4"/><path d="M38 2 Q42 8 38 14" opacity=".4"/><path d="M48 8 L52 8 L52 12" opacity=".4"/><path d="M8 48 L8 52 L12 52" opacity=".4"/><circle cx="42" cy="42" r="1.4" fill="currentColor" opacity=".55"/></g></svg>
+          <svg class="fam-corner fam-corner--tr" viewBox="0 0 62 62" fill="none"><g stroke="currentColor" stroke-width="1" fill="none"><path d="M2 28 L2 2 L28 2"/><path d="M8 32 L8 8 L32 8" opacity=".55"/><path d="M14 8 Q10 8 10 12 Q10 18 16 18 Q22 18 22 12 Q22 8 18 8 Q14 8 14 12" fill="currentColor" fill-opacity=".15"/><circle cx="16" cy="13" r="2" fill="currentColor"/><path d="M30 8 Q38 16 30 24" opacity=".55"/><path d="M8 30 Q16 38 24 30" opacity=".55"/><circle cx="42" cy="42" r="1.4" fill="currentColor" opacity=".55"/></g></svg>
+          <svg class="fam-corner fam-corner--bl" viewBox="0 0 62 62" fill="none"><g stroke="currentColor" stroke-width="1" fill="none"><path d="M2 28 L2 2 L28 2"/><path d="M8 32 L8 8 L32 8" opacity=".55"/><path d="M14 8 Q10 8 10 12 Q10 18 16 18 Q22 18 22 12 Q22 8 18 8 Q14 8 14 12" fill="currentColor" fill-opacity=".15"/><circle cx="16" cy="13" r="2" fill="currentColor"/><path d="M30 8 Q38 16 30 24" opacity=".55"/><path d="M8 30 Q16 38 24 30" opacity=".55"/><circle cx="42" cy="42" r="1.4" fill="currentColor" opacity=".55"/></g></svg>
+          <svg class="fam-corner fam-corner--br" viewBox="0 0 62 62" fill="none"><g stroke="currentColor" stroke-width="1" fill="none"><path d="M2 28 L2 2 L28 2"/><path d="M8 32 L8 8 L32 8" opacity=".55"/><path d="M14 8 Q10 8 10 12 Q10 18 16 18 Q22 18 22 12 Q22 8 18 8 Q14 8 14 12" fill="currentColor" fill-opacity=".15"/><circle cx="16" cy="13" r="2" fill="currentColor"/><path d="M30 8 Q38 16 30 24" opacity=".55"/><path d="M8 30 Q16 38 24 30" opacity=".55"/><circle cx="42" cy="42" r="1.4" fill="currentColor" opacity=".55"/></g></svg>
           <div class="fam-role">Those who walk with us</div>
           <div class="fam-names">
             Kristine Valdez<br>
@@ -1347,9 +1369,9 @@ a:focus-visible,button:focus-visible{outline:2px solid var(--gold);outline-offse
       <div class="locs-grid" style="max-width:560px;margin:0 auto">
         <article class="loc-card">
           <svg class="loc-corner loc-corner--tl" viewBox="0 0 62 62" fill="none" aria-hidden="true"><g stroke="currentColor" stroke-width="1" fill="none"><path d="M2 28 L2 2 L28 2"/><path d="M8 32 L8 8 L32 8" opacity=".55"/><path d="M14 8 Q10 8 10 12 Q10 18 16 18 Q22 18 22 12 Q22 8 18 8 Q14 8 14 12" fill="currentColor" fill-opacity=".15"/><circle cx="16" cy="13" r="2" fill="currentColor"/><path d="M30 8 Q38 16 30 24" opacity=".55"/><path d="M8 30 Q16 38 24 30" opacity=".55"/><path d="M2 38 Q8 42 14 38" opacity=".4"/><path d="M38 2 Q42 8 38 14" opacity=".4"/><path d="M48 8 L52 8 L52 12" opacity=".4"/><path d="M8 48 L8 52 L12 52" opacity=".4"/><circle cx="42" cy="42" r="1.4" fill="currentColor" opacity=".55"/></g></svg>
-          <svg class="loc-corner loc-corner--tr" viewBox="0 0 62 62" fill="none" aria-hidden="true"><g stroke="currentColor" stroke-width="1" fill="none"><path d="M2 28 L2 2 L28 2"/><path d="M8 32 L8 8 L32 8" opacity=".55"/><path d="M14 8 Q10 8 10 12 Q10 18 16 18 Q22 18 22 12 Q22 8 18 8 Q14 8 14 12" fill="currentColor" fill-opacity=".15"/><circle cx="16" cy="13" r="2" fill="currentColor"/><path d="M30 8 Q38 16 30 24" opacity=".55"/><path d="M8 30 Q16 38 24 30" opacity=".55"/><path d="M2 38 Q8 42 14 38" opacity=".4"/><path d="M38 2 Q42 8 38 14" opacity=".4"/><path d="M48 8 L52 8 L52 12" opacity=".4"/><path d="M8 48 L8 52 L12 52" opacity=".4"/><circle cx="42" cy="42" r="1.4" fill="currentColor" opacity=".55"/></g></svg>
-          <svg class="loc-corner loc-corner--bl" viewBox="0 0 62 62" fill="none" aria-hidden="true"><g stroke="currentColor" stroke-width="1" fill="none"><path d="M2 28 L2 2 L28 2"/><path d="M8 32 L8 8 L32 8" opacity=".55"/><path d="M14 8 Q10 8 10 12 Q10 18 16 18 Q22 18 22 12 Q22 8 18 8 Q14 8 14 12" fill="currentColor" fill-opacity=".15"/><circle cx="16" cy="13" r="2" fill="currentColor"/><path d="M30 8 Q38 16 30 24" opacity=".55"/><path d="M8 30 Q16 38 24 30" opacity=".55"/><path d="M2 38 Q8 42 14 38" opacity=".4"/><path d="M38 2 Q42 8 38 14" opacity=".4"/><path d="M48 8 L52 8 L52 12" opacity=".4"/><path d="M8 48 L8 52 L12 52" opacity=".4"/><circle cx="42" cy="42" r="1.4" fill="currentColor" opacity=".55"/></g></svg>
-          <svg class="loc-corner loc-corner--br" viewBox="0 0 62 62" fill="none" aria-hidden="true"><g stroke="currentColor" stroke-width="1" fill="none"><path d="M2 28 L2 2 L28 2"/><path d="M8 32 L8 8 L32 8" opacity=".55"/><path d="M14 8 Q10 8 10 12 Q10 18 16 18 Q22 18 22 12 Q22 8 18 8 Q14 8 14 12" fill="currentColor" fill-opacity=".15"/><circle cx="16" cy="13" r="2" fill="currentColor"/><path d="M30 8 Q38 16 30 24" opacity=".55"/><path d="M8 30 Q16 38 24 30" opacity=".55"/><path d="M2 38 Q8 42 14 38" opacity=".4"/><path d="M38 2 Q42 8 38 14" opacity=".4"/><path d="M48 8 L52 8 L52 12" opacity=".4"/><path d="M8 48 L8 52 L12 52" opacity=".4"/><circle cx="42" cy="42" r="1.4" fill="currentColor" opacity=".55"/></g></svg>
+          <svg class="loc-corner loc-corner--tr" viewBox="0 0 62 62" fill="none" aria-hidden="true"><g stroke="currentColor" stroke-width="1" fill="none"><path d="M2 28 L2 2 L28 2"/><path d="M8 32 L8 8 L32 8" opacity=".55"/><path d="M14 8 Q10 8 10 12 Q10 18 16 18 Q22 18 22 12 Q22 8 18 8 Q14 8 14 12" fill="currentColor" fill-opacity=".15"/><circle cx="16" cy="13" r="2" fill="currentColor"/><path d="M30 8 Q38 16 30 24" opacity=".55"/><path d="M8 30 Q16 38 24 30" opacity=".55"/><circle cx="42" cy="42" r="1.4" fill="currentColor" opacity=".55"/></g></svg>
+          <svg class="loc-corner loc-corner--bl" viewBox="0 0 62 62" fill="none" aria-hidden="true"><g stroke="currentColor" stroke-width="1" fill="none"><path d="M2 28 L2 2 L28 2"/><path d="M8 32 L8 8 L32 8" opacity=".55"/><path d="M14 8 Q10 8 10 12 Q10 18 16 18 Q22 18 22 12 Q22 8 18 8 Q14 8 14 12" fill="currentColor" fill-opacity=".15"/><circle cx="16" cy="13" r="2" fill="currentColor"/><path d="M30 8 Q38 16 30 24" opacity=".55"/><path d="M8 30 Q16 38 24 30" opacity=".55"/><circle cx="42" cy="42" r="1.4" fill="currentColor" opacity=".55"/></g></svg>
+          <svg class="loc-corner loc-corner--br" viewBox="0 0 62 62" fill="none" aria-hidden="true"><g stroke="currentColor" stroke-width="1" fill="none"><path d="M2 28 L2 2 L28 2"/><path d="M8 32 L8 8 L32 8" opacity=".55"/><path d="M14 8 Q10 8 10 12 Q10 18 16 18 Q22 18 22 12 Q22 8 18 8 Q14 8 14 12" fill="currentColor" fill-opacity=".15"/><circle cx="16" cy="13" r="2" fill="currentColor"/><path d="M30 8 Q38 16 30 24" opacity=".55"/><path d="M8 30 Q16 38 24 30" opacity=".55"/><circle cx="42" cy="42" r="1.4" fill="currentColor" opacity=".55"/></g></svg>
           <div class="loc-type">Civil Ceremony</div>
           <div class="loc-time">5:00<small>PM</small></div>
           <div class="loc-divider" aria-hidden="true">
@@ -1537,16 +1559,44 @@ a:focus-visible,button:focus-visible{outline:2px solid var(--gold);outline-offse
   <section class="section-bg dress">
     <div class="container">
       <div class="eyebrow">Dress code</div>
-      <h2>Formal · <em>Vintage</em></h2>
-      <div class="dress-sub">gold &amp; blush palette</div>
-      <div class="dress-note">Gentlemen · formal suit &nbsp;·&nbsp; Ladies · long evening dress<br><span style="font-size:13px;opacity:.75">We suggest blue, gray or green tones for guests</span></div>
-      <div class="dress-swatches">
-        <div class="swatch"><div class="swatch-c" style="background:linear-gradient(135deg,#7B96B2,#3F587A)"></div><div class="swatch-n">Blue</div></div>
-        <div class="swatch"><div class="swatch-c" style="background:linear-gradient(135deg,#9BA0A8,#6E727A)"></div><div class="swatch-n">Gray</div></div>
-        <div class="swatch"><div class="swatch-c" style="background:linear-gradient(135deg,#7A8C72,#4D5B47)"></div><div class="swatch-n">Green</div></div>
-        <div class="swatch"><div class="swatch-c" style="background:linear-gradient(135deg,#EAC9CD,#D4A0A8)"></div><div class="swatch-n">Blush</div></div>
-        <div class="swatch"><div class="swatch-c" style="background:linear-gradient(135deg,#E8D5A0,#8F7335)"></div><div class="swatch-n">Gold</div></div>
+      <h2>Formal · <em>Mexicano</em></h2>
+      <div class="dress-sub">earth tones &amp; terracotta</div>
+      <div class="dress-cols">
+        <!-- Gentlemen -->
+        <div class="dress-col">
+          <svg class="dress-col-icon" viewBox="0 0 36 36" fill="none" aria-hidden="true">
+            <path d="M10 6 L18 12 L26 6 L30 10 L22 16 L22 32 L14 32 L14 16 L6 10 Z" stroke="currentColor" stroke-width="1.2" fill="none" stroke-linejoin="round"/>
+            <path d="M18 12 L18 32" stroke="currentColor" stroke-width=".8" opacity=".5"/>
+            <circle cx="18" cy="20" r=".9" fill="currentColor" opacity=".5"/>
+            <circle cx="18" cy="24" r=".9" fill="currentColor" opacity=".5"/>
+            <circle cx="18" cy="28" r=".9" fill="currentColor" opacity=".5"/>
+          </svg>
+          <div class="dress-col-title">Gentlemen</div>
+          <div class="dress-col-rule"></div>
+          <div class="dress-col-sub">Beige pants &amp; embroidered<br>guayabera shirt<br>in <em>earth tones</em></div>
+          <figure class="dress-ref">
+            <img src="vestimenta-hombres.jpg" alt="Gentlemen dress code: embroidered guayabera in earth tones" loading="lazy">
+          </figure>
+        </div>
+        <!-- Divider -->
+        <div class="dress-divider" aria-hidden="true"></div>
+        <!-- Ladies -->
+        <div class="dress-col">
+          <svg class="dress-col-icon" viewBox="0 0 36 36" fill="none" aria-hidden="true">
+            <path d="M18 4 C18 4 14 8 12 12 L6 32 L30 32 L24 12 C22 8 18 4 18 4 Z" stroke="currentColor" stroke-width="1.2" fill="none" stroke-linejoin="round"/>
+            <path d="M12 12 Q18 16 24 12" stroke="currentColor" stroke-width=".9" opacity=".6"/>
+            <path d="M10 22 Q18 26 26 22" stroke="currentColor" stroke-width=".7" opacity=".5"/>
+            <path d="M8 28 Q18 32 28 28" stroke="currentColor" stroke-width=".7" opacity=".4"/>
+          </svg>
+          <div class="dress-col-title">Ladies</div>
+          <div class="dress-col-rule"></div>
+          <div class="dress-col-sub">Formal dress<br>in <em>earth tones</em></div>
+          <figure class="dress-ref">
+            <img src="vestimenta-mujeres.jpg" alt="Ladies dress code: formal dress in earth tones" loading="lazy">
+          </figure>
+        </div>
       </div>
+      <p style="text-align:center;font-family:var(--serif);font-style:italic;font-size:14px;color:var(--ink-soft);margin:32px auto 0;max-width:540px;opacity:.9;">This is not a costume party &mdash; formal attire required.</p>
     </div>
   </section>
 
@@ -1621,9 +1671,9 @@ a:focus-visible,button:focus-visible{outline:2px solid var(--gold);outline-offse
       <div class="gifts-grid">
         <article class="gift-card">
           <svg class="gift-corner gift-corner--tl" viewBox="0 0 62 62" fill="none"><g stroke="currentColor" stroke-width="1" fill="none"><path d="M2 28 L2 2 L28 2"/><path d="M8 32 L8 8 L32 8" opacity=".55"/><path d="M14 8 Q10 8 10 12 Q10 18 16 18 Q22 18 22 12 Q22 8 18 8 Q14 8 14 12" fill="currentColor" fill-opacity=".15"/><circle cx="16" cy="13" r="2" fill="currentColor"/><path d="M30 8 Q38 16 30 24" opacity=".55"/><path d="M8 30 Q16 38 24 30" opacity=".55"/><path d="M2 38 Q8 42 14 38" opacity=".4"/><path d="M38 2 Q42 8 38 14" opacity=".4"/><path d="M48 8 L52 8 L52 12" opacity=".4"/><path d="M8 48 L8 52 L12 52" opacity=".4"/><circle cx="42" cy="42" r="1.4" fill="currentColor" opacity=".55"/></g></svg>
-          <svg class="gift-corner gift-corner--tr" viewBox="0 0 62 62" fill="none"><g stroke="currentColor" stroke-width="1" fill="none"><path d="M2 28 L2 2 L28 2"/><path d="M8 32 L8 8 L32 8" opacity=".55"/><path d="M14 8 Q10 8 10 12 Q10 18 16 18 Q22 18 22 12 Q22 8 18 8 Q14 8 14 12" fill="currentColor" fill-opacity=".15"/><circle cx="16" cy="13" r="2" fill="currentColor"/><path d="M30 8 Q38 16 30 24" opacity=".55"/><path d="M8 30 Q16 38 24 30" opacity=".55"/><path d="M2 38 Q8 42 14 38" opacity=".4"/><path d="M38 2 Q42 8 38 14" opacity=".4"/><path d="M48 8 L52 8 L52 12" opacity=".4"/><path d="M8 48 L8 52 L12 52" opacity=".4"/><circle cx="42" cy="42" r="1.4" fill="currentColor" opacity=".55"/></g></svg>
-          <svg class="gift-corner gift-corner--bl" viewBox="0 0 62 62" fill="none"><g stroke="currentColor" stroke-width="1" fill="none"><path d="M2 28 L2 2 L28 2"/><path d="M8 32 L8 8 L32 8" opacity=".55"/><path d="M14 8 Q10 8 10 12 Q10 18 16 18 Q22 18 22 12 Q22 8 18 8 Q14 8 14 12" fill="currentColor" fill-opacity=".15"/><circle cx="16" cy="13" r="2" fill="currentColor"/><path d="M30 8 Q38 16 30 24" opacity=".55"/><path d="M8 30 Q16 38 24 30" opacity=".55"/><path d="M2 38 Q8 42 14 38" opacity=".4"/><path d="M38 2 Q42 8 38 14" opacity=".4"/><path d="M48 8 L52 8 L52 12" opacity=".4"/><path d="M8 48 L8 52 L12 52" opacity=".4"/><circle cx="42" cy="42" r="1.4" fill="currentColor" opacity=".55"/></g></svg>
-          <svg class="gift-corner gift-corner--br" viewBox="0 0 62 62" fill="none"><g stroke="currentColor" stroke-width="1" fill="none"><path d="M2 28 L2 2 L28 2"/><path d="M8 32 L8 8 L32 8" opacity=".55"/><path d="M14 8 Q10 8 10 12 Q10 18 16 18 Q22 18 22 12 Q22 8 18 8 Q14 8 14 12" fill="currentColor" fill-opacity=".15"/><circle cx="16" cy="13" r="2" fill="currentColor"/><path d="M30 8 Q38 16 30 24" opacity=".55"/><path d="M8 30 Q16 38 24 30" opacity=".55"/><path d="M2 38 Q8 42 14 38" opacity=".4"/><path d="M38 2 Q42 8 38 14" opacity=".4"/><path d="M48 8 L52 8 L52 12" opacity=".4"/><path d="M8 48 L8 52 L12 52" opacity=".4"/><circle cx="42" cy="42" r="1.4" fill="currentColor" opacity=".55"/></g></svg>
+          <svg class="gift-corner gift-corner--tr" viewBox="0 0 62 62" fill="none"><g stroke="currentColor" stroke-width="1" fill="none"><path d="M2 28 L2 2 L28 2"/><path d="M8 32 L8 8 L32 8" opacity=".55"/><path d="M14 8 Q10 8 10 12 Q10 18 16 18 Q22 18 22 12 Q22 8 18 8 Q14 8 14 12" fill="currentColor" fill-opacity=".15"/><circle cx="16" cy="13" r="2" fill="currentColor"/><path d="M30 8 Q38 16 30 24" opacity=".55"/><path d="M8 30 Q16 38 24 30" opacity=".55"/><circle cx="42" cy="42" r="1.4" fill="currentColor" opacity=".55"/></g></svg>
+          <svg class="gift-corner gift-corner--bl" viewBox="0 0 62 62" fill="none"><g stroke="currentColor" stroke-width="1" fill="none"><path d="M2 28 L2 2 L28 2"/><path d="M8 32 L8 8 L32 8" opacity=".55"/><path d="M14 8 Q10 8 10 12 Q10 18 16 18 Q22 18 22 12 Q22 8 18 8 Q14 8 14 12" fill="currentColor" fill-opacity=".15"/><circle cx="16" cy="13" r="2" fill="currentColor"/><path d="M30 8 Q38 16 30 24" opacity=".55"/><path d="M8 30 Q16 38 24 30" opacity=".55"/><circle cx="42" cy="42" r="1.4" fill="currentColor" opacity=".55"/></g></svg>
+          <svg class="gift-corner gift-corner--br" viewBox="0 0 62 62" fill="none"><g stroke="currentColor" stroke-width="1" fill="none"><path d="M2 28 L2 2 L28 2"/><path d="M8 32 L8 8 L32 8" opacity=".55"/><path d="M14 8 Q10 8 10 12 Q10 18 16 18 Q22 18 22 12 Q22 8 18 8 Q14 8 14 12" fill="currentColor" fill-opacity=".15"/><circle cx="16" cy="13" r="2" fill="currentColor"/><path d="M30 8 Q38 16 30 24" opacity=".55"/><path d="M8 30 Q16 38 24 30" opacity=".55"/><circle cx="42" cy="42" r="1.4" fill="currentColor" opacity=".55"/></g></svg>
           <div class="gift-icon">
             <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.3" stroke-linecap="round">
               <rect x="2" y="6" width="20" height="14" rx="2"/>
@@ -1666,9 +1716,9 @@ a:focus-visible,button:focus-visible{outline:2px solid var(--gold);outline-offse
     <div class="container">
       <div class="rsvp-card">
         <svg class="rsvp-corner rsvp-corner--tl" viewBox="0 0 62 62" fill="none" aria-hidden="true"><g stroke="currentColor" stroke-width="1" fill="none"><path d="M2 28 L2 2 L28 2"/><path d="M8 32 L8 8 L32 8" opacity=".55"/><path d="M14 8 Q10 8 10 12 Q10 18 16 18 Q22 18 22 12 Q22 8 18 8 Q14 8 14 12" fill="currentColor" fill-opacity=".15"/><circle cx="16" cy="13" r="2" fill="currentColor"/><path d="M30 8 Q38 16 30 24" opacity=".55"/><path d="M8 30 Q16 38 24 30" opacity=".55"/><path d="M2 38 Q8 42 14 38" opacity=".4"/><path d="M38 2 Q42 8 38 14" opacity=".4"/><path d="M48 8 L52 8 L52 12" opacity=".4"/><path d="M8 48 L8 52 L12 52" opacity=".4"/><circle cx="42" cy="42" r="1.4" fill="currentColor" opacity=".55"/></g></svg>
-        <svg class="rsvp-corner rsvp-corner--tr" viewBox="0 0 62 62" fill="none" aria-hidden="true"><g stroke="currentColor" stroke-width="1" fill="none"><path d="M2 28 L2 2 L28 2"/><path d="M8 32 L8 8 L32 8" opacity=".55"/><path d="M14 8 Q10 8 10 12 Q10 18 16 18 Q22 18 22 12 Q22 8 18 8 Q14 8 14 12" fill="currentColor" fill-opacity=".15"/><circle cx="16" cy="13" r="2" fill="currentColor"/><path d="M30 8 Q38 16 30 24" opacity=".55"/><path d="M8 30 Q16 38 24 30" opacity=".55"/><path d="M2 38 Q8 42 14 38" opacity=".4"/><path d="M38 2 Q42 8 38 14" opacity=".4"/><path d="M48 8 L52 8 L52 12" opacity=".4"/><path d="M8 48 L8 52 L12 52" opacity=".4"/><circle cx="42" cy="42" r="1.4" fill="currentColor" opacity=".55"/></g></svg>
-        <svg class="rsvp-corner rsvp-corner--bl" viewBox="0 0 62 62" fill="none" aria-hidden="true"><g stroke="currentColor" stroke-width="1" fill="none"><path d="M2 28 L2 2 L28 2"/><path d="M8 32 L8 8 L32 8" opacity=".55"/><path d="M14 8 Q10 8 10 12 Q10 18 16 18 Q22 18 22 12 Q22 8 18 8 Q14 8 14 12" fill="currentColor" fill-opacity=".15"/><circle cx="16" cy="13" r="2" fill="currentColor"/><path d="M30 8 Q38 16 30 24" opacity=".55"/><path d="M8 30 Q16 38 24 30" opacity=".55"/><path d="M2 38 Q8 42 14 38" opacity=".4"/><path d="M38 2 Q42 8 38 14" opacity=".4"/><path d="M48 8 L52 8 L52 12" opacity=".4"/><path d="M8 48 L8 52 L12 52" opacity=".4"/><circle cx="42" cy="42" r="1.4" fill="currentColor" opacity=".55"/></g></svg>
-        <svg class="rsvp-corner rsvp-corner--br" viewBox="0 0 62 62" fill="none" aria-hidden="true"><g stroke="currentColor" stroke-width="1" fill="none"><path d="M2 28 L2 2 L28 2"/><path d="M8 32 L8 8 L32 8" opacity=".55"/><path d="M14 8 Q10 8 10 12 Q10 18 16 18 Q22 18 22 12 Q22 8 18 8 Q14 8 14 12" fill="currentColor" fill-opacity=".15"/><circle cx="16" cy="13" r="2" fill="currentColor"/><path d="M30 8 Q38 16 30 24" opacity=".55"/><path d="M8 30 Q16 38 24 30" opacity=".55"/><path d="M2 38 Q8 42 14 38" opacity=".4"/><path d="M38 2 Q42 8 38 14" opacity=".4"/><path d="M48 8 L52 8 L52 12" opacity=".4"/><path d="M8 48 L8 52 L12 52" opacity=".4"/><circle cx="42" cy="42" r="1.4" fill="currentColor" opacity=".55"/></g></svg>
+        <svg class="rsvp-corner rsvp-corner--tr" viewBox="0 0 62 62" fill="none" aria-hidden="true"><g stroke="currentColor" stroke-width="1" fill="none"><path d="M2 28 L2 2 L28 2"/><path d="M8 32 L8 8 L32 8" opacity=".55"/><path d="M14 8 Q10 8 10 12 Q10 18 16 18 Q22 18 22 12 Q22 8 18 8 Q14 8 14 12" fill="currentColor" fill-opacity=".15"/><circle cx="16" cy="13" r="2" fill="currentColor"/><path d="M30 8 Q38 16 30 24" opacity=".55"/><path d="M8 30 Q16 38 24 30" opacity=".55"/><circle cx="42" cy="42" r="1.4" fill="currentColor" opacity=".55"/></g></svg>
+        <svg class="rsvp-corner rsvp-corner--bl" viewBox="0 0 62 62" fill="none" aria-hidden="true"><g stroke="currentColor" stroke-width="1" fill="none"><path d="M2 28 L2 2 L28 2"/><path d="M8 32 L8 8 L32 8" opacity=".55"/><path d="M14 8 Q10 8 10 12 Q10 18 16 18 Q22 18 22 12 Q22 8 18 8 Q14 8 14 12" fill="currentColor" fill-opacity=".15"/><circle cx="16" cy="13" r="2" fill="currentColor"/><path d="M30 8 Q38 16 30 24" opacity=".55"/><path d="M8 30 Q16 38 24 30" opacity=".55"/><circle cx="42" cy="42" r="1.4" fill="currentColor" opacity=".55"/></g></svg>
+        <svg class="rsvp-corner rsvp-corner--br" viewBox="0 0 62 62" fill="none" aria-hidden="true"><g stroke="currentColor" stroke-width="1" fill="none"><path d="M2 28 L2 2 L28 2"/><path d="M8 32 L8 8 L32 8" opacity=".55"/><path d="M14 8 Q10 8 10 12 Q10 18 16 18 Q22 18 22 12 Q22 8 18 8 Q14 8 14 12" fill="currentColor" fill-opacity=".15"/><circle cx="16" cy="13" r="2" fill="currentColor"/><path d="M30 8 Q38 16 30 24" opacity=".55"/><path d="M8 30 Q16 38 24 30" opacity=".55"/><circle cx="42" cy="42" r="1.4" fill="currentColor" opacity=".55"/></g></svg>
 
         <div class="rsvp-inner">
           <svg class="rsvp-ornament" viewBox="0 0 320 56" fill="none" aria-hidden="true">
@@ -1966,8 +2016,9 @@ gsap.fromTo('.countdown .eyebrow, .countdown h2, .countdown-sub',{opacity:0,y:14
 })();
 
 // DRESS
-gsap.fromTo('.swatch',{opacity:0,scale:.4,y:30},{opacity:1,scale:1,y:0,duration:1.1,stagger:.1,ease:'elastic.out(1,.6)',scrollTrigger:{trigger:'.dress-swatches',start:'top 82%'}});
-gsap.fromTo('.dress .eyebrow, .dress h2, .dress-sub, .dress-note',{opacity:0,y:14},{opacity:1,y:0,duration:.9,stagger:.08,scrollTrigger:{trigger:'.dress',start:'top 78%'}});
+gsap.fromTo('.dress .eyebrow, .dress h2, .dress-sub',{opacity:0,y:14},{opacity:1,y:0,duration:.9,stagger:.08,scrollTrigger:{trigger:'.dress',start:'top 78%'}});
+gsap.fromTo('.dress-col',{opacity:0,y:40,scale:.95},{opacity:1,y:0,scale:1,duration:1.1,stagger:.15,ease:'power4.out',scrollTrigger:{trigger:'.dress-cols',start:'top 82%'}});
+gsap.fromTo('.dress-ref',{opacity:0,scale:.9},{opacity:1,scale:1,duration:1,stagger:.2,ease:'power3.out',scrollTrigger:{trigger:'.dress-cols',start:'top 75%'}});
 
 // WHEEL OF FORTUNE
 const wheel = document.getElementById('wheel');
