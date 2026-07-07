@@ -1193,6 +1193,21 @@ a:focus-visible,button:focus-visible{outline:2px solid var(--gold);outline-offse
   transition:transform .3s ease,box-shadow .3s ease;
 }
 #music-toggle:hover{transform:scale(1.08);box-shadow:0 6px 28px rgba(0,0,0,.4)}
+#music-hint{
+  position:fixed;bottom:32px;right:84px;z-index:100;
+  font-family:var(--sans);font-size:12px;font-weight:600;
+  letter-spacing:.06em;color:var(--paper);
+  background:var(--accent-deep);border:1px solid var(--gold);
+  padding:6px 14px;border-radius:20px;
+  box-shadow:0 4px 16px rgba(0,0,0,.3);
+  animation:hintPulse 2s ease-in-out infinite;
+  pointer-events:none;white-space:nowrap;
+}
+#music-hint::after{
+  content:"";position:absolute;top:50%;right:-6px;transform:translateY(-50%);
+  border:6px solid transparent;border-left-color:var(--accent-deep);
+}
+@keyframes hintPulse{0%,100%{opacity:1}50%{opacity:.5}}
 #music-toggle .bar{
   display:inline-block;width:3px;margin:0 1.5px;
   background:currentColor;border-radius:2px;
@@ -1244,6 +1259,7 @@ a:focus-visible,button:focus-visible{outline:2px solid var(--gold);outline-offse
 <button id="music-toggle" aria-label="Reproducir/pausar música" type="button">
   <span class="bar"></span><span class="bar"></span><span class="bar"></span><span class="bar"></span>
 </button>
+<span id="music-hint">Press here</span>
 
 <div class="wrap">
 
@@ -1349,7 +1365,7 @@ a:focus-visible,button:focus-visible{outline:2px solid var(--gold);outline-offse
         </article>
         <article class="fam-card fam-card--raised">
           <div class="fam-role">Raised with the love of</div>
-          <div class="fam-names">María E. Mendez<br><span class="amp-gold">&amp;</span><br>Roy H. Mendez</div>
+          <div class="fam-names">Roy H. Mendez<br><span class="amp-gold">&amp;</span><br>María E. Mendez</div>
         </article>
         <article class="fam-card fam-card--padrino">
           <div class="fam-role">Those who walk with us</div>
@@ -2320,7 +2336,9 @@ gsap.fromTo('.fam-card',{opacity:0,y:40,scale:.95},{opacity:1,y:0,scale:1,durati
   const toggle = document.getElementById('music-toggle');
   if(!audio || !toggle) return;
 
+  const hint = document.getElementById('music-hint');
   toggle.addEventListener('click', ()=>{
+    if(hint) hint.style.display='none';
     if(audio.paused){
       audio.play().then(()=>toggle.classList.add('playing')).catch(()=>{});
     }else{
