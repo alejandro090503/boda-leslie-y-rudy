@@ -484,6 +484,23 @@ h1 em,h2 em,h3 em{font-style:italic;font-weight:500;color:var(--accent)}
   white-space:nowrap;
 }
 
+/* Indicaciones de llegada (el pin de Google Maps no cae exacto en el venue) */
+.loc-note{
+  margin:0 auto 24px;padding:16px 20px;max-width:92%;text-align:center;
+  border:1px solid color-mix(in srgb,var(--gold) 45%,transparent);
+  background:color-mix(in srgb,var(--paper) 70%,transparent);
+}
+.loc-note-title{
+  font-family:var(--italiana);font-size:11px;letter-spacing:.4em;text-transform:uppercase;
+  color:var(--gold-deep);padding-left:.4em;margin-bottom:8px;
+}
+.loc-note p{
+  font-family:var(--serif);font-size:17px;font-style:italic;font-weight:500;
+  text-transform:none;letter-spacing:normal;
+  color:var(--ink-soft);line-height:1.65;margin:0;
+}
+.loc-note p + p{margin-top:6px}
+
 .loc-btn{
   display:inline-flex;align-items:center;gap:10px;padding:14px 30px;
   border:1px solid var(--accent-deep);background:transparent;
@@ -1453,6 +1470,12 @@ a:focus-visible,button:focus-visible{outline:2px solid var(--gold);outline-offse
               src="https://maps.google.com/maps?q=14065+SH-16+S+San+Antonio+TX+78224&t=&z=15&ie=UTF8&iwloc=&output=embed"
               title="Event map"></iframe>
           </div>
+          <div class="loc-note">
+            <div class="loc-note-title">Directions</div>
+            <p>When you Exit 410 onto Hwy 16/ Poteet Hwy travel south for 3 miles.</p>
+            <p>The Road will start to curve to the right passing over creek.</p>
+            <p>The Venue will be on Right side as soon as you cross over creek</p>
+          </div>
           <a class="loc-btn" href="https://www.google.com/maps/search/?api=1&query=14065+SH-16+S+San+Antonio+TX+78224" target="_blank" rel="noopener">
             <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><path d="M12 22s7-7.5 7-13a7 7 0 1 0-14 0c0 5.5 7 13 7 13z"/><circle cx="12" cy="9" r="2.5"/></svg>
             Open in Google Maps
@@ -1808,7 +1831,7 @@ a:focus-visible,button:focus-visible{outline:2px solid var(--gold);outline-offse
 
           <div class="eyebrow">RSVP</div>
           <h2 class="rsvp-title">Your presence <em>means</em> everything</h2>
-          <p class="rsvp-text">Please confirm your attendance before <strong>October 10, 2026</strong>.</p>
+          <p class="rsvp-text">Please confirm your attendance before <strong>October 17, 2026</strong>.</p>
 
           <p id="rsvp-name-display" style="display:none;font-family:var(--display);font-style:italic;font-size:clamp(30px,7vw,44px);color:var(--gold-deep);line-height:1.2;margin:18px auto 4px;"></p>
 
@@ -1838,7 +1861,7 @@ a:focus-visible,button:focus-visible{outline:2px solid var(--gold);outline-offse
 
           <div class="rsvp-deadline">
             <svg width="12" height="12" viewBox="0 0 24 24" fill="currentColor"><path d="M12 2C6.5 2 2 6.5 2 12s4.5 10 10 10 10-4.5 10-10S17.5 2 12 2zm.5 5v5.25l4.5 2.67-.75 1.23L11 13V7h1.5z"/></svg>
-            Deadline · October 10, 2026
+            Deadline · October 17, 2026
           </div>
         </div>
       </div>
@@ -2186,7 +2209,7 @@ gsap.fromTo('.album-link',{opacity:0,y:10},{opacity:1,y:0,duration:.9,scrollTrig
 (function(){
   const PANEL_API = 'https://panel-invitados.vercel.app/api/confirmar';
   const RSVP_URL  = 'https://boda-leslie-y-rudy.vercel.app';
-  const DEADLINE  = new Date(2026, 9, 10, 23, 59, 59, 999);
+  const DEADLINE  = new Date(2026, 9, 17, 23, 59, 59, 999); // October 17, 2026
   const frozen    = Date.now() > DEADLINE.getTime();
   const params    = new URLSearchParams(location.search);
   const urlPara   = (params.get('para') || '').trim();
